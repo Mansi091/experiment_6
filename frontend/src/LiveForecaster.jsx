@@ -111,14 +111,14 @@ const LiveForecaster = () => {
     setCoords(null);
     
     try {
-      const geoReq = await axios.get(`https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1`);
-      if (!geoReq.data.results || geoReq.data.results.length === 0) {
-        setErrorMsg('Location not found. Try another city.');
+      const geoReq = await axios.get(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(city)}&limit=1`);
+      if (!geoReq.data || geoReq.data.length === 0) {
+        setErrorMsg('Location not found. Try a broader search term.');
         setLoading(false);
         return;
       }
-      const loc = geoReq.data.results[0];
-      await fetchLivePrediction(loc.latitude, loc.longitude, `${loc.name}, ${loc.country || ''}`);
+      const loc = geoReq.data[0];
+      await fetchLivePrediction(parseFloat(loc.lat), parseFloat(loc.lon), loc.display_name.split(',')[0]);
     } catch (err) {
       setErrorMsg('Failed to find location.');
       setLoading(false);

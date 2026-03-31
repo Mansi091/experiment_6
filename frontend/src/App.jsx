@@ -3,6 +3,7 @@ import { Shield, BarChart2, MapPin } from 'lucide-react';
 import Dashboard from './Dashboard';
 import Predictor from './Predictor';
 import LiveForecaster from './LiveForecaster';
+import SafeRoute from './SafeRoute';
 import './index.css';
 
 function App() {
@@ -41,6 +42,14 @@ function App() {
             <MapPin size={20} />
             Live Forecaster
           </button>
+          
+          <button 
+            className={`nav-btn ${currentTab === 'saferoute' ? 'active' : ''}`}
+            onClick={() => setCurrentTab('saferoute')}
+          >
+            <MapPin size={20} />
+            Safe Route
+          </button>
         </div>
       </div>
 
@@ -49,6 +58,7 @@ function App() {
         {currentTab === 'dashboard' && <Dashboard />}
         {currentTab === 'predictor' && <Predictor />}
         {currentTab === 'forecaster' && <LiveForecaster />}
+        {currentTab === 'saferoute' && <SafeRoute />}
       </div>
     </div>
   );
