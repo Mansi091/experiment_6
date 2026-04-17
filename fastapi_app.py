@@ -98,4 +98,4 @@ def predict_risk(req: PredictRequest):
         except:
              pred_class, probs = 2, [0.0, 0.0, 1.0]
 
-    return {"prediction": pred_class, "probabilities": probs, "risk_score": float(rr_score)}
+    return {"prediction": pred_class, "probabilities": probs, "risk_score": float(rr_score, "message": "CI/CD pipeline working successfully ")}
